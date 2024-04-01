@@ -1,0 +1,154 @@
+﻿
+newsfeed_flush_inherited_titles_effect = {
+  save_scope_as = newsfeed_inheritor
+
+  every_newsfeed_title_container = {
+    ordered_in_list = {
+      variable = newsfeed_inherited_titles
+      order_by = tier
+      max = 1
+      save_scope_as = newsfeed_main_title
+    }
+
+    var:newsfeed_title_source = {
+      save_scope_as = newsfeed_previous_holder
+    }
+
+    newsfeed_save_title_count = { AS = newsfeed_title_count }
+    save_scope_value_as = { name = newsfeed_death_gold value = scope:newsfeed_previous_holder.gold }
+
+    every_player = {
+      limit = {
+        OR = {
+          newsfeed_is_interested_in_titles = { PERSON = scope:newsfeed_inheritor }
+          newsfeed_is_interested_in_titles = { PERSON = scope:newsfeed_previous_holder }
+        }
+      }
+
+      save_temporary_scope_as = newsfeed_observer
+
+      send_interface_message = {
+        type = newsfeed_titles
+        title = newsfeed_titles_inherited
+        desc = newsfeed_titles_inherited_desc
+        right_icon = scope:newsfeed_inheritor
+        left_icon = scope:newsfeed_previous_holder
+      }
+    }
+
+    end_story = yes
+  }
+}
+
+newsfeed_save_title_count = {
+  if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count > 10
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_many }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 10
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_10 }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 9
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_9 }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 8
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_8 }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 7
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_7 }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 6
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_6 }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 5
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_5 }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 4
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_4 }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 3
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_3 }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 2
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_2 }
+  }
+  else_if = {
+    limit = {
+      any_in_list = {
+        variable = newsfeed_inherited_titles
+        count = 1
+      }
+    }
+
+    save_scope_value_as = { name = $AS$ value = flag:newsfeed_title_count_1 }
+  }
+}

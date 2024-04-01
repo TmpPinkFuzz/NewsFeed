@@ -1,0 +1,103 @@
+﻿
+newsfeed_message_index_string = {
+  type = story
+
+  text = {
+    fallback = yes
+    localization_key = "[ROOT.GetVariable('newsfeed_message_index').GetValue|0]"
+  }
+}
+
+newsfeed_select_all_for_type_tooltip = {
+  type = character
+
+  text = {
+    fallback = yes
+    localization_key = newsfeed_select_all_for_type_tooltip
+  }
+}
+
+newsfeed_relation_prefix = {
+  type = character
+
+  text = {
+    trigger = {
+      has_RelationToMe_relation = { CHARACTER = scope:second }
+    }
+
+    localization_key = newsfeed_relation_prefix
+  }
+
+  text = {
+    fallback = yes
+    localization_key = ""
+  }
+}
+
+newsfeed_relation = {
+  type = character
+
+  text = {
+    trigger = {
+      root = scope:second
+    }
+
+    localization_key = CHARACTER_NAME_ME
+  }
+
+  text = {
+    fallback = yes
+    localization_key = "[Scope.Char.Custom2('RelationToMeShort', second.Self)]"
+  }
+}
+
+newsfeed_relation_possessive = {
+  type = character
+
+  text = {
+    trigger = {
+      root = scope:second
+    }
+
+    localization_key = CHARACTER_NAME_MY
+  }
+
+  text = {
+    fallback = yes
+    localization_key = "[Scope.Char.Custom2('RelationToMePossessive', second.Self)]"
+  }
+}
+
+newsfeed_relation_name = {
+  type = character
+
+  text = {
+    trigger = {
+      root = scope:second
+    }
+
+    localization_key = CHARACTER_NAME_ME
+  }
+
+  text = {
+    fallback = yes
+    localization_key = newsfeed_relation_name
+  }
+}
+
+newsfeed_her_his_my = {
+  type = character
+
+  text = {
+    trigger = {
+      root = scope:second
+    }
+
+    localization_key = CHARACTER_NAME_MY
+  }
+
+  text = {
+    fallback = yes
+    localization_key = "[Scope.Char.GetHerHis]"
+  }
+}

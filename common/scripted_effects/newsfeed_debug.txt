@@ -1,0 +1,23 @@
+﻿newsfeed_send_test_toast = {
+    every_player = {
+        send_interface_message = {
+            type = newsfeed_test_toast
+        }
+    }
+}
+
+newsfeed_send_test_message = {
+    every_player = {
+        send_interface_message = {
+            type = newsfeed_test_message
+        }
+    }
+}
+
+newsfeed_send_several_test_toasts = {
+    newsfeed_send_test_toast = yes
+    newsfeed_send_test_toast = yes
+    newsfeed_send_test_toast = yes
+    newsfeed_send_test_toast = yes
+    newsfeed_send_test_toast = yes
+}

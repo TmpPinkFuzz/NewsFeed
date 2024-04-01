@@ -1,0 +1,58 @@
+﻿
+newsfeed_write_message_gui = {
+  scope = character
+
+  saved_scopes = {
+    newsfeed_message_tooltip
+    newsfeed_message_title
+    newsfeed_message_desc
+    newsfeed_message_date
+    newsfeed_message_goodness
+    newsfeed_message_left_character
+    newsfeed_message_right_character
+  }
+
+  effect = {
+    if = {
+      limit = {
+        NOR = {
+          scope:newsfeed_message_title = flag:newsfeed_suppress
+          scope:newsfeed_message_desc = flag:newsfeed_suppress
+          scope:newsfeed_message_tooltip = flag:newsfeed_suppress
+        }
+      }
+      
+      newsfeed_write_message_effect = {
+        type = scope:newsfeed_message_tooltip
+        title = scope:newsfeed_message_title
+        desc = scope:newsfeed_message_desc
+        date = scope:newsfeed_message_date
+        goodness = scope:newsfeed_message_goodness
+        left_character = scope:newsfeed_message_left_character
+        right_character = scope:newsfeed_message_right_character
+      }
+    }
+  }
+}
+
+newsfeed_delete_message_gui = {
+  scope = character
+
+  saved_scopes = {
+    newsfeed_message_index
+  }
+
+  effect = {
+    newsfeed_delete_message_effect = {
+      INDEX = scope:newsfeed_message_index
+    }
+  }
+}
+
+newsfeed_delete_all_messages_gui = {
+  scope = character
+
+  effect = {
+    newsfeed_delete_all_messages_effect = yes
+  }
+}

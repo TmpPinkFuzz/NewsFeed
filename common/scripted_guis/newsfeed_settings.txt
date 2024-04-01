@@ -1,0 +1,80 @@
+﻿
+newsfeed_ensure_settings_initialized_gui = {
+  scope = character
+
+  is_valid = {
+    OR = {
+      any_owned_story = {
+        story_type = story_newsfeed_setting
+      }
+      NAND = {
+        has_variable = newsfeed_settings_initialized
+        var:newsfeed_settings_initialized = yes
+      }
+    }
+  }
+
+  effect = {
+    if = {
+      limit = {
+        any_owned_story = {
+          story_type = story_newsfeed_setting
+        }
+      }
+      
+      newsfeed_migrate_all_settings_from_old_style = yes
+
+      every_owned_story = {
+        limit = { story_type = story_newsfeed_setting }
+
+        end_story = yes
+      }
+
+      clear_variable_list = newsfeed_setting_containers
+      clear_global_variable_list = newsfeed_subjects
+      clear_global_variable_list = newsfeed_types
+    }
+
+    newsfeed_set_default_settings = yes
+
+    set_variable = { name = newsfeed_settings_initialized value = yes }
+  }
+}
+
+newsfeed_reset_settings_to_default_gui = {
+  scope = character
+
+  effect = {
+    newsfeed_clear_all_settings = yes
+    newsfeed_set_default_settings = yes
+  }
+}
+
+newsfeed_select_all_for_subject_tooltip = {
+  saved_scopes = { newsfeed_subject }
+
+  effect = {
+    custom_tooltip = newsfeed_select_all_for_subject_tooltip
+  }
+}
+
+newsfeed_select_all_for_type_tooltip = {
+  saved_scopes = {
+    newsfeed_type
+  }
+
+  effect = {
+    custom_tooltip = newsfeed_select_all_for_type_tooltip
+  }
+}
+
+newsfeed_setting_tooltip = {
+  saved_scopes = {
+    newsfeed_type
+    newsfeed_subject
+  }
+
+  effect = {
+    custom_tooltip = newsfeed_setting_tooltip
+  }
+}

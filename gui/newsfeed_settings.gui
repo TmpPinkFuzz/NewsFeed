@@ -1,0 +1,195 @@
+﻿newsfeed_settings_menu = {
+    name = "newsfeed_settings_window"
+}
+
+types NewsFeed {
+    type newsfeed_settings_menu = window {
+        using = Window_Background
+        using = Window_Decoration_Spike
+
+        parentanchor = center
+        layer = top
+
+        size = { 720 800 }
+
+        state = {
+            name = _show
+            using = Animation_FadeIn_Quick
+            trigger_on_create = yes
+        }
+    
+        state = {
+            name = _hide
+            using = Animation_FadeOut_Quick
+        }
+
+        vbox = {
+            using = Window_Margins
+
+            newsfeed_settings_header = {
+                layoutpolicy_horizontal = expanding
+
+                blockoverride "header_text"
+                {
+                    text = "newsfeed_settings_header"
+                }
+                blockoverride "button_close"
+                {
+                    onclick = "[GetVariableSystem.Clear('newsfeed_settings_shown')]"
+                }
+            }
+
+            vbox = {
+                layoutpolicy_vertical = expanding
+
+                expand = {}
+
+                flowcontainer = {
+                    margin_top = 20
+                    text_multi = {
+                        text = newsfeed_settings_explanation
+                        align = center
+                        autoresize = yes
+                        max_width = 350
+                    }
+                }
+                
+                expand = {}
+
+                hbox = {
+                    margin_top = 40
+                    newsfeed_settings_columns = {}
+                }
+
+                expand = {}
+            }
+
+            flowcontainer = {
+                button_standard = {
+                    text = "CHARACTER_RESET_FILTERS"
+                    focuspolicy = click
+                    onclick = "[GetScriptedGui('newsfeed_reset_settings_to_default_gui').Execute( GuiScope.SetRoot(GetPlayer.MakeScope).End )]"
+                }
+                margin_top = 50
+                margin_bottom = 50
+            }
+        }
+    }
+
+    type newsfeed_settings_header = widget {
+        name = "header"
+        size = { 100 56 }
+
+        background = {
+            name = "header"
+            texture = "gfx/interface/component_tiles/tile_title_big_top_01.dds"
+            spriteType = Corneredtiled
+            texture_density = 2
+
+            modify_texture = {
+                name = "mask"
+                texture = "gfx/interface/component_masks/mask_title_big_top.dds"
+                spriteType = Corneredtiled
+                spriteborder = { 160 0 }
+                blend_mode = alphamultiply
+                alpha = 0.5
+            }
+
+            modify_texture = {
+                name = "overlay"
+                texture = "gfx/interface/component_overlay/overlay_title_big_top.dds"
+                spriteType = Corneredstretched
+                spriteborder = { 0 0 }
+                blend_mode = overlay
+            }
+        }
+
+        flowcontainer = {
+            parentanchor = top|right
+            margin = { 8 8 }
+            button_close = {
+                name = "button_close"
+                shortcut = "close_window"
+                tooltip = "CLOSE_TOOLTIP"
+                clicksound = "event:/SFX/UI/Generic/sfx_ui_generic_close"
+    
+                using = Animation_ShowHide_Standard
+
+                block "button_close" {}
+            }
+        }
+
+        text_single = {
+            name = "header_text"
+            parentanchor = top|hcenter
+            position = { 0 5 }
+
+            block "header_text" {
+                text = "Header Text"
+            }
+
+            maximumsize = { 400 -1 }
+
+            using = Font_Type_Flavor
+            using = Font_Size_Big
+        }
+    }
+
+    type newsfeed_column_spacer = widget {
+        size = { 30 83 }
+    }
+
+    type newsfeed_subject_column = flowcontainer {
+        direction = vertical
+
+        flowcontainer = {
+            widget = {
+                size = { 30 30 }
+                block "icon" {}
+                using = tooltip_ne
+            }
+            margin_bottom = 8
+        }
+
+        flowcontainer = {
+            newsfeed_select_all_checkbox = {
+                block "select_all" {}
+            }
+            margin_bottom = 16
+        }
+    }
+
+    type newsfeed_type_label_column = vbox {
+        margin_right = 8
+        newsfeed_column_spacer = {}
+    }
+
+    type newsfeed_type_label_row = hbox {
+        margin_right = 8
+        layoutpolicy_horizontal = expanding
+
+        text_single = {
+            layoutpolicy_horizontal = expanding
+            align = right|nobaseline
+            block "text" {}
+            default_format = "#high"
+            margin_right = 8
+        }
+
+        newsfeed_select_all_checkbox = {
+            block "select_all" {}
+        }
+    }
+
+    type newsfeed_setting_checkbox = flowcontainer {
+        margin_right = 8
+        button_checkbox = {
+            block "checkbox" {}
+            using = tooltip_ne
+        }
+    }
+
+    type newsfeed_select_all_checkbox = button_checkbox {
+        using = tooltip_ne
+    }
+}

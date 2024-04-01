@@ -1,0 +1,9 @@
+﻿newsfeed_message_container = {
+	base = owned_story
+	conditions = { story_type = story_newsfeed_message }
+}
+
+newsfeed_title_container = {
+	base = owned_story
+	conditions = { story_type = story_newsfeed_titles }
+}

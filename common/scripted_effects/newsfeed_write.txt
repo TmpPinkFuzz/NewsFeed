@@ -1,0 +1,153 @@
+﻿
+newsfeed_write_message_effect = {
+  set_variable = {
+    name = newsfeed_next_message_index
+    value = {
+      value = 1
+      if = {
+        limit = {
+          has_variable = newsfeed_next_message_index
+        }
+        add = var:newsfeed_next_message_index
+      }
+    }
+  }
+
+  create_story = {
+    type = story_newsfeed_message
+    save_scope_as = newsfeed_new_container
+  }
+
+  scope:newsfeed_new_container = {
+    set_variable = {
+      name = newsfeed_message_index
+      value = prev.var:newsfeed_next_message_index
+    }
+    set_variable = {
+      name = newsfeed_message_type
+      value = $type$
+    }
+    set_variable = {
+      name = newsfeed_message_title
+      value = $title$
+    }
+    set_variable = {
+      name = newsfeed_message_desc
+      value = $desc$
+    }
+    set_variable = {
+      name = newsfeed_message_date
+      value = $date$
+    }
+    set_variable = {
+      name = newsfeed_message_goodness
+      value = $goodness$
+    }
+    set_variable = {
+      name = newsfeed_message_left_character
+      value = $left_character$
+    }
+    set_variable = {
+      name = newsfeed_message_right_character
+      value = $right_character$
+    }
+    set_variable = {
+      name = newsfeed_message_datestamp
+      value = newsfeed_current_datestamp
+    }
+  }
+
+  newsfeed_resort_message_containers = yes
+  newsfeed_prune_message_containers = yes
+}
+
+newsfeed_delete_message_effect = {
+  ordered_newsfeed_message_container = {
+    limit = {
+      var:newsfeed_message_index = $INDEX$
+    }
+
+    max = 1
+    prev = {
+      remove_list_variable = {
+        name = newsfeed_recent_message_containers
+        target = prev
+      }
+      remove_list_variable = {
+        name = newsfeed_older_message_containers
+        target = prev
+      }
+    }
+    end_story = yes
+  }
+
+  newsfeed_resort_message_containers = yes
+}
+
+newsfeed_delete_all_messages_effect = {
+  clear_variable_list = newsfeed_recent_message_containers
+  clear_variable_list = newsfeed_older_message_containers
+  every_newsfeed_message_container = { end_story = yes }
+}
+
+newsfeed_resort_message_containers = {
+  clear_variable_list = newsfeed_recent_message_containers
+  clear_variable_list = newsfeed_older_message_containers
+
+  ordered_newsfeed_message_container = {
+    order_by = var:newsfeed_message_index
+    max = 20
+    check_range_bounds = no
+  
+    prev = {
+      add_to_variable_list = {
+        name = newsfeed_recent_message_containers
+        target = prev
+      }
+    }
+
+    save_scope_value_as = {
+      name = newsfeed_last_recent_index
+      value = var:newsfeed_message_index
+    }
+  }
+
+  ordered_newsfeed_message_container = {
+    limit = {
+      #var:newsfeed_message_index < scope:newsfeed_last_recent_index.compare_value
+      var:newsfeed_message_index < scope:newsfeed_last_recent_index
+    }
+
+    order_by = var:newsfeed_message_index
+    max = newsfeed_scrollback
+    check_range_bounds = no
+
+    prev = {
+      add_to_variable_list = {
+        name = newsfeed_older_message_containers
+        target = prev
+      }
+    }
+  }
+}
+
+newsfeed_prune_message_containers = {
+  every_newsfeed_message_container = {
+    limit = {
+      prev = {
+        NOR = {
+          is_target_in_variable_list = {
+            name = newsfeed_recent_message_containers
+            target = prev
+          }
+          is_target_in_variable_list = {
+            name = newsfeed_older_message_containers
+            target = prev
+          }
+        }
+      }
+    }
+
+    end_story = yes
+  }
+}

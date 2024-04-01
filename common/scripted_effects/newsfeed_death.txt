@@ -1,0 +1,15 @@
+﻿
+newsfeed_notify_of_death_effect = {
+  save_temporary_scope_as = newsfeed_observer
+
+  newsfeed_save_simple_relation = {
+    FIRST = scope:newsfeed_observer
+    SECOND = root
+    AS = newsfeed_dead_character_relation
+  }
+  save_scope_value_as = { name = newsfeed_death_gold value = root.gold }
+ 
+  root = { save_scope_as = newsfeed_dead_character }
+
+  trigger_event = newsfeed_death.0001
+}

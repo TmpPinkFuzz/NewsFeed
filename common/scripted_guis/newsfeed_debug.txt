@@ -1,0 +1,66 @@
+﻿
+newsfeed_send_test_message_gui = {
+	scope = empty
+
+	effect = {
+		newsfeed_send_test_message = yes
+		newsfeed_send_test_toast = yes
+# warning suppression code - never executed
+    if = { 
+      limit = { always = no  }
+      set_variable = { name = unused value = flag:newsfeed_type_offensive_war }
+      set_variable = { name = unused value = flag:newsfeed_suppress }
+      set_variable = { name = unused value = flag:newsfeed_type_pregnancy }
+      set_variable = { name = unused value = flag:newsfeed_type_birth }
+      set_variable = { name = unused value = flag:newsfeed_type_faith }
+      set_variable = { name = unused value = flag:newsfeed_type_titles }
+      set_variable = { name = unused value = flag:newsfeed_type_death }
+      set_variable = { name = unused value = flag:newsfeed_type_defensive_war }
+      set_variable = { name = unused value = flag:newsfeed_type_culture }
+      set_variable = { name = unused value = flag:newsfeed_type_marriage }
+      set_variable = { name = unused value = flag:newsfeed_subject_extended_dynastic_family }
+      set_variable = { name = unused value = flag:newsfeed_subject_self }
+      set_variable = { name = unused value = flag:newsfeed_subject_dynasty }
+      set_variable = { name = unused value = flag:newsfeed_subject_courtier }
+      set_variable = { name = unused value = flag:newsfeed_subject_close_dynastic_family }
+      set_variable = { name = unused value = flag:newsfeed_subject_direct_vassal }
+      set_variable = { name = unused value = flag:newsfeed_subject_pinned_character }
+      set_variable = { name = unused value = flag:newsfeed_subject_spouse }
+      set_variable = { name = unused value = flag:newsfeed_subject_liege }
+      
+      set_variable = { name = newsfeed_enabled_types value = 0 }
+      set_variable = { name = newsfeed_subject value = 0 }
+      set_variable = { name = newsfeed_subjects value = 0 }
+      set_variable = { name = newsfeed_setting_containers value = 0 }
+      set_variable = { name = newsfeed_types value = 0 }
+    }
+    if = {
+      limit = {
+        always = no
+        exists = flag:newsfeed_title_count_many
+        exists = flag:newsfeed_title_count_1
+        exists = flag:newsfeed_title_count_2
+        exists = flag:newsfeed_title_count_3
+        exists = flag:newsfeed_title_count_4
+        exists = flag:newsfeed_title_count_5
+        exists = flag:newsfeed_title_count_6
+        exists = flag:newsfeed_title_count_7
+        exists = flag:newsfeed_title_count_8
+        exists = flag:newsfeed_title_count_9
+        exists = flag:newsfeed_title_count_10
+        exists = scope:newsfeed_message_goodness
+      }
+    }
+
+#[16:23:00][jomini_effect.cpp:1119]: Variable 'newsfeed_message_right_character' is set but is never used. Note that use in localization doesn't count due to technical limitations. Use in unused scripted triggers and effects also does not count
+#[16:23:00][jomini_effect.cpp:1119]: Variable 'newsfeed_message_goodness' is set but is never used. Note that use in localization doesn't count due to technical limitations. Use in unused scripted triggers and effects also does not count
+#[16:23:00][jomini_effect.cpp:1119]: Variable 'newsfeed_message_datestamp' is set but is never used. Note that use in localization doesn't count due to technical limitations. Use in unused scripted triggers and effects also does not count
+#[16:23:00][jomini_effect.cpp:1119]: Variable 'newsfeed_message_title' is set but is never used. Note that use in localization doesn't count due to technical limitations. Use in unused scripted triggers and effects also does not count
+#[16:23:00][jomini_effect.cpp:1119]: Variable 'newsfeed_message_date' is set but is never used. Note that use in localization doesn't count due to technical limitations. Use in unused scripted triggers and effects also does not count
+#[16:23:00][jomini_effect.cpp:1119]: Variable 'newsfeed_message_left_character' is set but is never used. Note that use in localization doesn't count due to technical limitations. Use in unused scripted triggers and effects also does not count
+#[16:23:00][jomini_effect.cpp:1119]: Variable 'newsfeed_message_type' is set but is never used. Note that use in localization doesn't count due to technical limitations. Use in unused scripted triggers and effects also does not count
+#[16:23:00][jomini_effect.cpp:1119]: Variable 'newsfeed_message_desc' is set but is never used. Note that use in localization doesn't count due to technical limitations. Use in unused scripted triggers and effects also does not count
+
+# warning suppression code - end
+	}
+}

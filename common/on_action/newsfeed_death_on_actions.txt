@@ -1,0 +1,92 @@
+﻿
+on_death = {
+  on_actions = {
+    newsfeed_on_death
+    newsfeed_on_death_transfer_message_containers
+    newsfeed_on_death_transfer_settings
+  }
+}
+
+newsfeed_on_death = {
+  effect = {
+    every_player = {
+      limit = {
+        newsfeed_is_interested_in_death = { PERSON = root }
+        NOT = {
+          newsfeed_vanilla_will_show_death = { PERSON = root }
+        }
+      }
+
+      newsfeed_notify_of_death_effect = yes
+    }
+  }
+}
+
+newsfeed_on_death_transfer_message_containers = {
+  trigger = {
+    is_ai = no
+  }
+
+  effect = {
+    if = {
+      limit = {
+        exists = player_heir
+      }
+
+      player_heir = {
+        set_variable = {
+          name = newsfeed_next_message_index
+          value = prev.var:newsfeed_next_message_index
+        }
+      }
+  
+      every_in_list = {
+        variable = newsfeed_recent_message_containers
+  
+        prev.player_heir = {
+          add_to_variable_list = {
+            name = newsfeed_recent_message_containers
+            target = prev
+          }
+        }
+      }
+  
+      every_in_list = {
+        variable = newsfeed_older_message_containers
+  
+        prev.player_heir = {
+          add_to_variable_list = {
+            name = newsfeed_older_message_containers
+            target = prev
+          }
+        }
+      }
+    }
+    
+    remove_variable = newsfeed_next_message_index
+    clear_variable_list = newsfeed_recent_message_containers
+    clear_variable_list = newsfeed_older_message_containers
+  }
+}
+
+newsfeed_on_death_transfer_settings = {
+  trigger = {
+    is_ai = no
+  }
+
+  effect = {
+    if = {
+      limit = {
+        exists = player_heir
+      }
+
+      player_heir = {
+        save_scope_as = newsfeed_copy_settings_target
+      }
+
+      newsfeed_copy_all_settings = {
+        TARGET = scope:newsfeed_copy_settings_target
+      }
+    }
+  }
+}

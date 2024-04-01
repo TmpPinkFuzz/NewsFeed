@@ -1,0 +1,75 @@
+﻿newsfeed_notify_pregnancy_effect = {
+    if = {
+        limit = {
+            NOT = {
+                exists = scope:father
+            }
+        }
+
+        send_interface_message = {
+            type = newsfeed_pregnancy
+            title = newsfeed_pregnancy_mother
+            desc = newsfeed_pregnancy_no_father_desc
+            right_icon = scope:mother
+        }
+    }
+    else_if = {
+        limit = {
+            newsfeed_is_interested_in_pregnancy = { PERSON = scope:mother }
+        }
+
+        send_interface_message = {
+            type = newsfeed_pregnancy
+            title = newsfeed_pregnancy_mother
+            desc = newsfeed_pregnancy_desc
+            right_icon = scope:mother
+        }
+    }
+    else = {
+        send_interface_message = {
+            type = newsfeed_pregnancy
+            title = newsfeed_pregnancy_father
+            desc = newsfeed_pregnancy_desc
+            right_icon = scope:mother
+            left_icon = scope:father
+        }
+    }
+}
+
+newsfeed_notify_pregnancy_ended_effect = {
+    if = {
+        limit = {
+            NOT = {
+                exists = scope:father
+            }
+        }
+
+        send_interface_message = {
+            type = newsfeed_pregnancy_ended
+            title = newsfeed_pregnancy_ended_mother
+            desc = newsfeed_pregnancy_ended_no_father_desc
+            right_icon = scope:mother
+        }
+    }
+    else_if = {
+        limit = {
+            newsfeed_is_interested_in_pregnancy = { PERSON = scope:mother }
+        }
+
+        send_interface_message = {
+            type = newsfeed_pregnancy_ended
+            title = newsfeed_pregnancy_ended_mother
+            desc = newsfeed_pregnancy_ended_desc
+            right_icon = scope:mother
+        }
+    }
+    else = {
+        send_interface_message = {
+            type = newsfeed_pregnancy_ended
+            title = newsfeed_pregnancy_ended_father
+            desc = newsfeed_pregnancy_ended_desc
+            right_icon = scope:mother
+            left_icon = scope:father
+        }
+    }
+}
